@@ -17,10 +17,21 @@ fn merge<T: PartialOrd + Copy>(
     midpoint_index: usize,
     endpoint_index: usize,
 ) {
-    let length_left = midpoint_index - beginning_index + 1;
-    let length_right = endpoint_index - midpoint_index;
-    let mut left_array: Vec<T> = Vec::with_capacity(length_left);
-    let mut right_array: Vec<T> = Vec::with_capacity(length_right);
+    println!(
+        "beginning: {:?}, midpoint {:?}, end {:?}",
+        beginning_index, midpoint_index, endpoint_index
+    );
+    let length_left: usize = midpoint_index - beginning_index + 1;
+    let length_right: usize = endpoint_index - midpoint_index;
+    let mut left_array = vec![0; length_left];
+    let mut right_array = vec![0; length_right];
+    //    let mut left_array: Vec<T> = Vec::with_capacity(length_left);
+    //    let mut right_array: Vec<T> = Vec::with_capacity(length_right);
+    println!(
+        "left_array size: {:?}, right_array_size: {:?}",
+        left_array.len(),
+        right_array.len()
+    );
     let (mut i, mut j): (usize, usize);
     for i in 0..length_left {
         left_array[i] = array[beginning_index + i];
@@ -60,9 +71,9 @@ mod test_merge {
 
     #[test]
     fn merge_int_easy() {
-        let mut A = [2, 4, 6, 7, 1, 2, 3, 5];
+        let mut A = [10, 20, 30, 40, 1, 2, 3, 4];
         merge(&mut A, 0, 3, 7);
-        assert_eq!(A, [1, 2, 2, 3, 4, 5, 6, 7]);
+        assert_eq!(A, [1, 2, 3, 4, 10, 20, 30, 40]);
     }
 }
 
